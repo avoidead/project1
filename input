@@ -1,0 +1,62 @@
+from tkinter import *
+import webbrowser
+tk=Tk()
+class Windows():
+    def youtube(self):
+        webbrowser.open('www.youtube.com')
+    def facebook(self):
+        tk.destroy()
+        tk1=Tk()
+        l1=Label(tk1,text="User-id or Mobile number",fg="white",bg="black",font="system 20 bold").grid(row=0,column=0)
+        l2=Label(tk1,text="Password",fg="white",bg="black",font="system 20 bold").grid(row=1,column=0)
+        e1=Entry(tk1).grid(row=0,column=1)
+        e2=Entry(tk1,show="*").grid(row=1,column=1)
+        b1=Button(tk1,text="Login",command=ob3.printf).grid(row=2,column=1)
+    def instagram(self):
+        tk.destroy()
+        tk2=Tk()
+        l1=Label(tk2,text="User-id or Mobile number",fg="white",bg="black",font="system 20 bold").grid(row=0,column=0)
+        l2=Label(tk2,text="Password",fg="white",bg="black",font="system 20 bold").grid(row=1,column=0)
+        e1=Entry(tk2).grid(row=0,column=1)
+        e2=Entry(tk2,show="*").grid(row=1,column=1)
+        b1=Button(tk2,text="Login",command=ob3.printf).grid(row=2,column=1)
+    def gmail(self):
+        tk.destroy()
+        tk2=Tk()
+        l1=Label(tk2,text="User-id or Mobile number",fg="white",bg="black",font="system 20 bold").grid(row=0,column=0)
+        l2=Label(tk2,text="Password",fg="white",bg="black",font="system 20 bold").grid(row=1,column=0)
+        e1=Entry(tk2).grid(row=0,column=1)
+        e2=Entry(tk2,show="*").grid(row=1,column=1)
+        b1=Button(tk2,text="Login",command=ob3.printf).grid(row=2,column=1)
+    def maps(self):
+        tk.destroy()
+        tk2=Tk()
+        l1=Label(tk2,text="Enter the location",fg="white",bg="black",font="system 20 bold").grid(row=0,column=0)
+        e1=Entry(tk2).grid(row=0,column=1)
+        b1=Button(tk2,text="Go",command=ob3.printf).grid(row=2,column=1)
+    def niva(self):
+        tk.destroy()
+        tk2=Tk()
+        l1=Label(tk2,text="User-id or Mobile number",fg="white",bg="black",font="system 20 bold").grid(row=0,column=0)
+        l2=Label(tk2,text="Password",fg="white",bg="black",font="system 20 bold").grid(row=1,column=0)
+        e1=Entry(tk2).grid(row=0,column=1)
+        e2=Entry(tk2,show="*").grid(row=1,column=1)
+        b1=Button(tk2,text="Login",command=ob3.printf).grid(row=2,column=1)
+        
+ob2=Windows()
+global x
+class disp(Windows):
+    def printf(self):
+        x=e1.get()
+        print(x)
+ob3=disp()
+class Buttons():
+    def fun(self):
+        a=Button(tk,text="YouTube",command=ob2.youtube,fg="white",bg="red",font="Tradegothic 20 bold italic").grid(row=0,column=0)
+        b=Button(tk,text="Facebook",command=ob2.facebook,fg="white",bg="Royal blue2",font="Klavika 20 bold").grid(row=0,column=1)
+        c=Button(tk,text="Instagram",command=ob2.instagram,fg="white",bg="orange2",font = "system 20 bold ").grid(row=1,column=0)
+        d=Button(tk, text="G-mail",command=ob2.gmail,fg="white",bg="black",font="system 20 bold").grid(row=1,column=1)
+        e=Button(tk,text="Google Maps",command=ob2.maps,fg="white",bg="green",font="system 25 bold").grid(row=2,column=0)
+        f=Button(tk,text="NIVA",command=ob2.niva,fg="red",bg="white",font=" ansi 20 bold italic").grid(row=2,column=1)
+ob1=Buttons()
+ob1.fun()
