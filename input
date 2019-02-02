@@ -1,76 +1,316 @@
 from tkinter import *
 import webbrowser
-tk=Tk()
-bi=PhotoImage(file="Screenshot(677).png")
-img=Label(image=bi)
-img.image=bi.grid(row=0,column=0)
-tk.geometry("500x500+600+200")
-tk.title("subbu")
-tk.configure(bg="")
-def pf(x,y):
-        print(x)
-        print(y)
-def pf2(x1):
-    print(x1)
+from selenium import webdriver 
+from time import sleep
+from getpass import getpass
+def fun(a,b,c,d,e,usr,pwd,f=0):
+    driver = webdriver.Chrome("C:\\Users\\user\\Desktop\\project\\chromedriver.exe")
+    driver.get(a) 
+    sleep(3)
+    if(e==3):
+        username_box = driver.find_element_by_name(b)
+        username_box.send_keys(usr)
+    else:
+        username_box = driver.find_element_by_xpath(b) 
+        username_box.send_keys(usr)
+    sleep(3)
+    if(f!=0):
+        driver.find_element_by_xpath(d).click()
+        sleep(3)
+    if(e==3):
+        password_box = driver.find_element_by_name(c) 
+        password_box.send_keys(pwd)
+    else:    
+        password_box = driver.find_element_by_xpath(c) 
+        password_box.send_keys(pwd)
+    sleep(3)
+    print("Password entered")
+    if(f!=0):
+        login_box = driver.find_element_by_xpath(f).click()
+    else:
+        driver.find_element_by_xpath(d).click()
+    print ("Done")
+    input('Press anything to quit') 
+    driver.quit()
+    print("Finished")
+def maps1(x1):
+    location=x1
+    driver = webdriver.Chrome("C:\\Users\\user\\Desktop\\project\\chromedriver.exe")
+    driver.get("https://www.google.com/maps")
+    sleep(3)
+    search=driver.find_element_by_xpath("//*[@id='searchboxinput']")
+    search.send_keys(location)
+    driver.find_element_by_xpath("//*[@id='searchbox-searchbutton']").click()
+    sleep(3)
+    driver.find_element_by_xpath("//*[@id='minimap']/div/div[2]/button").click()
+    print("ur search found")
     
 def youtube():
-    webbrowser.open('www.youtube.com')
-def inp(event=None):
-    tk.destroy()
+    tk2=Tk()
+    tk2.geometry("375x150+400+190")
+    l1=Label(tk2,text="Enter video name",fg="white",bg="black",font="ansi 14 bold")
+    l1.grid(row=0,column=0)
+    e1=Entry(tk2)
+    e1.grid(row=0,column=1)
+    def printf2(event):
+        x1=e1.get()
+        youtube1(x1)
+    b1=Button(tk2,text="Go",command=lambda:printf2(event))
+    b1.grid(row=2,column=1)
+    tk2.bind("<Return>",printf2)
+def youtube1(x1):
+    location=x1
+    driver = webdriver.Chrome("C:\\Users\\user\\Desktop\\project\\chromedriver.exe")
+    driver.get("https://www.youtube.com")
+    sleep(3)
+    search=driver.find_element_by_xpath("//*[@id='search']")
+    search.send_keys(location)
+    driver.find_element_by_xpath("//*[@id='search-icon-legacy']").click()
+    sleep(3)
+    print("ur search found")
+    
+    
+def zodiac(month,day):
+    if month == 'december': 
+        astro_sign = 'Sagittarius' if (day < 22) else 'capricorn'
+          
+    elif month == 'january': 
+        astro_sign = 'Capricorn' if (day < 20) else 'aquarius'
+          
+    elif month == 'february': 
+        astro_sign = 'Aquarius' if (day < 19) else 'pisces'
+          
+    elif month == 'march': 
+        astro_sign = 'Pisces' if (day < 21) else 'aries'
+          
+    elif month == 'april': 
+        astro_sign = 'Aries' if (day < 20) else 'taurus'
+          
+    elif month == 'may': 
+        astro_sign = 'Taurus' if (day < 21) else 'gemini'
+          
+    elif month == 'june': 
+        astro_sign = 'Gemini' if (day < 21) else 'cancer'
+          
+    elif month == 'july': 
+        astro_sign = 'Cancer' if (day < 23) else 'leo'
+          
+    elif month == 'august': 
+        astro_sign = 'Leo' if (day < 23) else 'virgo'
+          
+    elif month == 'september': 
+        astro_sign = 'Virgo' if (day < 23) else 'libra'
+          
+    elif month == 'october': 
+        astro_sign = 'Libra' if (day < 23) else 'scorpio'
+          
+    elif month == 'november': 
+        astro_sign = 'scorpio' if (day < 22) else 'sagittarius'
+    tk=Tk()
+    l=Label(tk,text=astro_sign)
+    l.pack()
+def flames(a,b):
+    l=[i for i in a]
+    s=[i for i in b]
+    for i in range(len(l)):
+        for j in range(len(s)):
+            if(l[i]==s[j]):
+                l[i]=0
+                s[j]=0
+    l=[i for i in l if i!=0 and i!=' ']
+    s=[i for i in s if i!=0 and i!=' ']
+    c=len(s)+len(l)
+    l=['Friends','Love','Affection','Mariage','Enemies','Sister']
+    while(len(l)>1):
+        si=(c%len(l)-1)
+        if(si>=0):
+            l=l[si+1::]+l[:si:]
+        else:
+            l=l[:len(l)-1:]
+    relation="relation :"+l[0]
+    p=Tk()
+    p.geometry("25x25+400+190")
+    l1=Label(p,text=relation)
+    l1.pack()
+          
+def fb(event=None):
     tk1=Tk()
+    tk1.geometry("375x150+400+190")
     e1=Entry(tk1)
     e2=Entry(tk1,show="*")
-    def printf():
+    def printf(event):
         x=e1.get()
         y=e2.get()
-        pf(x,y)
+        fun(f1,f2,f3,f4,1,x,y)
     l1=Label(tk1,text="User-id or Mobile number",fg="Royal blue4",font="ansi 14 bold")
     l1.grid(row=0,column=0)
     l2=Label(tk1,text="Password",fg="Royal blue4",font="ansi 14 bold")
     l2.grid(row=1,column=0)
-    b1=Button(tk1,text="Login",command=printf)
+    b1=Button(tk1,text="Login",command=lambda:printf(event))
     e1.grid(row=0,column=1)
     e2.grid(row=1,column=1)
     b1.grid(row=2,column=1)
-def maps():
-    tk.destroy()
+    tk1.bind("<Return>",printf)
+def mail(event=None):
+    tk1=Tk()
+    tk1.geometry("375x150+400+190")
+    e1=Entry(tk1)
+    e2=Entry(tk1,show="*")
+    def printf(event):
+        x=e1.get()
+        y=e2.get()
+        fun(g1,g2,g3,g4,2,x,y,g5)
+    l1=Label(tk1,text="User-id or Mobile number",fg="Royal blue4",font="ansi 14 bold")
+    l1.grid(row=0,column=0)
+    l2=Label(tk1,text="Password",fg="Royal blue4",font="ansi 14 bold")
+    l2.grid(row=1,column=0)
+    b1=Button(tk1,text="Login",command=lambda:printf(event))
+    e1.grid(row=0,column=1)
+    e2.grid(row=1,column=1)
+    b1.grid(row=2,column=1)
+    tk1.bind("<Return>",printf)
+def insta(event=None):
+    tk1=Tk()
+    tk1.geometry("375x150+400+190")
+    e1=Entry(tk1)
+    e2=Entry(tk1,show="*")
+    def printf(event):
+        x=e1.get()
+        y=e2.get()
+        fun(i1,i2,i3,i4,3,x,y)
+    l1=Label(tk1,text="User-id or Mobile number",fg="Royal blue4",font="ansi 14 bold")
+    l1.grid(row=0,column=0)
+    l2=Label(tk1,text="Password",fg="Royal blue4",font="ansi 14 bold")
+    l2.grid(row=1,column=0)
+    b1=Button(tk1,text="Login",command=lambda:printf(event))
+    e1.grid(row=0,column=1)
+    e2.grid(row=1,column=1)
+    b1.grid(row=2,column=1)
+    tk1.bind("<Return>",printf)
+def inp(event=None):
+    tk1=Tk()
+    tk1.geometry("375x150+400+190")
+    e1=Entry(tk1)
+    e2=Entry(tk1)
+    def printf(event):
+        x=e1.get()
+        y=e2.get()
+        zodiac(x,int(y))
+    l1=Label(tk1,text="Month",fg="Royal blue4",font="ansi 14 bold")
+    l1.grid(row=0,column=0)
+    l2=Label(tk1,text="Date",fg="Royal blue4",font="ansi 14 bold")
+    l2.grid(row=1,column=0)
+    b1=Button(tk1,text="Go",command=lambda:printf(event))
+    e1.grid(row=0,column=1)
+    e2.grid(row=1,column=1)
+    b1.grid(row=2,column=1)
+    tk1.bind("<Return>",printf)
+def maps(event=None):
     tk2=Tk()
+    tk2.geometry("375x150+400+190")
     l1=Label(tk2,text="Enter the location",fg="white",bg="black",font="ansi 14 bold")
     l1.grid(row=0,column=0)
-    e1=Entry(tk2).grid(row=0,column=1)
-    def printf2():
+    e1=Entry(tk2)
+    e1.grid(row=0,column=1)
+    def printf4(event):
         x1=e1.get()
-        pf2(x1)
-    b1=Button(tk2,text="Go",command=printf2)
+        maps1(x1)
+    b1=Button(tk2,text="Go",command=lambda:printf4(event))
     b1.grid(row=2,column=1)
-def niva():
-    tk.destroy()
-    tk2=Tk()
-    l1=Label(tk2,text="Roll-No:-",fg="Royal blue",font="ansi 20 bold")
+    tk2.bind("<Return>",printf4)
+def inp1(event=None):
+    tk1=Tk()
+    tk1.geometry("375x150+400+190")
+    e1=Entry(tk1)
+    e2=Entry(tk1)
+    def printf(event):
+        x=e1.get()
+        y=e2.get()
+        flames(x,y)
+        tk1.destroy()
+    l1=Label(tk1,text="first person name",fg="Royal blue4",font="ansi 14 bold")
     l1.grid(row=0,column=0)
-    l2=Label(tk2,text="Password:-",fg="Royal blue",font="ansi 20 bold")
+    l2=Label(tk1,text="second person name",fg="Royal blue4",font="ansi 14 bold")
     l2.grid(row=1,column=0)
-    e1=Entry(tk2).grid(row=0,column=1)
-    e2=Entry(tk2,show="*").grid(row=1,column=1)
-    b1=Button(tk2,text="Login",command=printf).grid(row=2,column=1)
-def fun():
+    b1=Button(tk1,text="Go",command=lambda:printf(event))
+    e1.grid(row=0,column=1)
+    e2.grid(row=1,column=1)
+    b1.grid(row=2,column=1)
+    tk1.bind("<Return>",printf)
+def nivas(x,y):
+    usr=x
+    pwd=y
+    driver = webdriver.Chrome("C:\\Users\\user\\Desktop\\project\\chromedriver.exe")
+    driver.get("https://niva.vidyanikethan.edu/Login.aspx") 
+    sleep(3)
+    username_box = driver.find_element_by_xpath("//*[@id='UserName']") 
+    username_box.send_keys(usr)
+    sleep(3)
+    password_box = driver.find_element_by_xpath("//*[@id='Password']") 
+    password_box.send_keys(pwd)
+    sleep(3)
+    print("Password entered")
+    driver.find_element_by_xpath("//*[@id='LoginButton']").click()
+    sleep(3)
+    print ("Done")
+    input("enter any number to quit:")
+    driver.quit() 
+    print("Finished")
+    
+
+def niva(event=None):
+    tk1=Tk()
+    tk1.geometry("375x150+400+190")
+    e1=Entry(tk1)
+    e2=Entry(tk1,show="*")
+    def printf2(event):
+        x=e1.get()
+        y=e2.get()
+        nivas(x,y)
+    l1=Label(tk1,text="RollNo",fg="Royal blue4",font="ansi 14 bold")
+    l1.grid(row=0,column=0)
+    l2=Label(tk1,text="Password",fg="Royal blue4",font="ansi 14 bold")
+    l2.grid(row=1,column=0)
+    b1=Button(tk1,text="Go",command=lambda:printf2(event))
+    e1.grid(row=0,column=1)
+    e2.grid(row=1,column=1)
+    b1.grid(row=2,column=1)
+    tk1.bind("<Return>",printf2)
+def fun1():
     a=Button(tk,text="YouTube",command=youtube,fg="white",bg="red",font="ansi 14 bold",height=2,width=8)
-    a.grid(row=0,column=0)
-    b=Button(tk,text="Facebook",command=inp,fg="white",bg="Royal blue2",font="ansi 14 bold",height=2,width=8)
-    b.grid(row=0,column=1)
-    c=Button(tk,text="Instagram",command=inp,fg="white",bg="brown2",font = "ansi 14  bold ",height=2,width=8)
-    c.grid(row=1,column=0)
-    d=Button(tk, text="G-mail",command=inp,fg="white",bg="black",font="ansi 14 bold",height=2,width=8)
-    d.grid(row=1,column=1)
+    b=Button(tk,text="Facebook",command=fb,fg="white",bg="Royal blue2",font="ansi 14 bold",height=2,width=8)
+    c=Button(tk,text="Instagram",command=insta,fg="white",bg="brown2",font = "ansi 14  bold ",height=2,width=8)
+    d=Button(tk,text="G-mail",command=mail,fg="white",bg="black",font="ansi 14 bold",height=2,width=8)
     e=Button(tk,text="Maps",command=maps,fg="white",bg="green",font="ansi 14 bold",height=2,width=8)
-    e.grid(row=2,column=0)
-    f=Button(tk,text="NIVA",command=niva,fg="red",bg="white",font=" ansi 14  bold italic",height=2,width=8)
-    f.grid(row=2,column=1)
-    a.place(x=150,y=160)
+    f=Button(tk,text="NIVA",command=niva,fg="black",bg="white",font=" ansi 14  bold italic",height=2,width=8)
+    g=Button(tk,text="Flames",command=inp1,fg="red",bg="khaki",font=" ansi 14  bold italic",height=2,width=8)
+    h=Button(tk,text="Zodiac",command=inp,fg="red",bg="bisque4",font=" ansi 14  bold italic",height=2,width=8)
+    a.place(x=20,y=250)
     b.place(x=255,y=160)
-    c.place(x=150,y=220)
     c.place(x=255,y=220)
     d.place(x=150,y=280)
     e.place(x=255,y=280)
     f.place(x=150,y=220)
-fun()
+    g.place(x=255,y=340)
+    h.place(x=150,y=340)
+    
+tk=Tk()
+tk.title("VIP")
+canvas=Canvas(tk,width=1366,height=768)
+canvas.pack()
+my_image=PhotoImage(file="C:\\Users\\user\\Downloads\\72270.png")
+canvas.create_image(0,0,anchor=NW,image=my_image)
+f1='https://www.facebook.com/'
+f2='//*[@id="email"]'
+f3='//*[@id="pass"]'
+f4="//*[@id='u_0_2']"
+g1='https://accounts.google.com/ServiceLogin/identifier?service=mail&passive=true&rm=false&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1&flowName=GlifWebSignIn&flowEntry=AddSession'
+g2='//*[@id="identifierId"]'
+g3='//*[@id="password"]/div[1]/div/div[1]/input'
+g4="//*[@id='identifierNext']/content/span"
+g5='//*[@id="passwordNext"]/content/span'
+i1='https://www.instagram.com/accounts/login/?hl=en'
+i2='username'
+i3='password'
+i4="//*[@id='react-root']/section/main/div/article/div/div[1]/div/form/div[3]"
+fun1()
